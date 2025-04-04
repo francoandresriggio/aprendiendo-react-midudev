@@ -1,4 +1,5 @@
 import { Square } from './Square.jsx'
+import { Reset } from './Reset.jsx'
 
 export function WinnerModal ({ winner, resetGame }) {
   if (winner === null) return null
@@ -15,7 +16,7 @@ export function WinnerModal ({ winner, resetGame }) {
         </header>
 
         <footer>
-          <button onClick={resetGame}>Empezar de nuevo</button>
+          <Reset resetGame={resetGame}>Empezar de nuevo</Reset>
         </footer>
       </div>
     </section>

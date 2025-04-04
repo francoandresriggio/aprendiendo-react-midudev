@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import confetti from 'canvas-confetti'
-
-import { Square } from './components/Square.jsx'
 import { TURNS } from './constants.js'
 import { checkWinnerFrom, checkEndGame } from './logic/board.js'
 import { WinnerModal } from './components/WinnerModal.jsx'
+import { Game } from './components/Game.jsx'
+import { Turn } from './components/Turn.jsx'
+import { Reset } from './components/Reset.jsx'
 import { saveGameToStorage, resetGameStorage } from './logic/storage/index.js'
 
 function App () {
@@ -58,32 +59,13 @@ function App () {
 
   return (
     <main className='board'>
-      <h1 translate="no">Tic tac toe</h1>
-      <button onClick={resetGame}>Reset del juego</button>
-      <section className='game'>
-        {
-          board.map((square, index) => {
-            return (
-              <Square
-                key={index}
-                index={index}
-                updateBoard={updateBoard}
-              >
-                {square}
-              </Square>
-            )
-          })
-        }
-      </section>
+      <h1 translate='no'>Tic tac toe</h1>
 
-      <section className='turn'>
-        <Square isSelected={turn === TURNS.X}>
-          {TURNS.X}
-        </Square>
-        <Square isSelected={turn === TURNS.O}>
-          {TURNS.O}
-        </Square>
-      </section>
+      <Reset resetGame={resetGame}>Reset del juego</Reset>
+
+      <Game updateBoard={updateBoard} board={board} />
+
+      <Turn turn={turn} />
 
       <WinnerModal resetGame={resetGame} winner={winner} />
     </main>
